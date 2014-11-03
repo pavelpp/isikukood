@@ -40,7 +40,9 @@ def control_nr(code):
             8*int(code[5]) + 9*int(code[6]) + 1*int(code[7]) + 2*int(code[8]) + 3*int(code[9])
     if sum1 % 11 != 10:
         return str(sum1 % 11)
-    else: return str(sum2 % 11)
+    elif sum2 % 11 != 10:
+        return str(sum2 % 11)
+    else: return "0"
 
 def zeroes(number, length):
     """adds leading zeroes, where necessary"""
