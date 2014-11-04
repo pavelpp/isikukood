@@ -34,10 +34,14 @@ def is_leap(year):
     else: return False
 
 def control_nr(code):
-    sum1 = 1*int(code[0]) + 2*int(code[1]) + 3*int(code[2]) + 4*int(code[3]) + 5*int(code[4]) + \
-           6*int(code[5]) + 7*int(code[6]) + 8*int(code[7]) + 9*int(code[8]) + 1*int(code[9])
-    sum2 = 3*int(code[0]) + 4*int(code[1]) + 5*int(code[2]) + 6*int(code[3]) + 7*int(code[4]) + \
-            8*int(code[5]) + 9*int(code[6]) + 1*int(code[7]) + 2*int(code[8]) + 3*int(code[9])
+    code = [int(i) for i in code]
+
+    weight1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1]
+    weight2 = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3]
+
+    sum1 = sum([x*y for x,y in zip(code, weight1)])
+    sum2 = sum([x*y for x,y in zip(code, weight2)])
+
     if sum1 % 11 != 10:
         return str(sum1 % 11)
     elif sum2 % 11 != 10:
