@@ -1,13 +1,28 @@
+import datetime
+
 __author__ = 'pavel'
 
 from random import randint
 import subprocess
 
+
+def get_cent(birth_date):
+    year = str(birth_date.year)
+    if year[:2] == "18":
+        return randint(1,2)
+    elif year[:2] == "19":
+        return randint(3,4)
+    elif year[:2] == "20":
+        return randint(5,6)
+    else:
+        return None
+
 def generate():
     """generates a valid estonian personal code"""
-    s_cent = randint(1, 6)
     serial_nr = randint(1, 999)
-    code = str(s_cent) + gen_date() + zeroes(serial_nr, 3)
+    birth_date = gen_date_alt()
+    s_cent = get_cent(birth_date)
+    code = str(s_cent) + birth_date.strftime("%y%m%d") + zeroes(serial_nr, 3)
     final_code = code + control_nr(code)
     return final_code
 
@@ -25,6 +40,9 @@ def gen_date():
         bday = randint(1, 31)
     return zeroes(byear, 2) + zeroes(bmonth, 2) + zeroes(bday, 2)
 
+def gen_date_alt():
+    person_date = datetime.date(1800,1,1)+datetime.timedelta(days=randint(1,109573))
+    return person_date #.strftime("%y%m%d")
 
 def get_bday(month, year):
     if month == 2 and is_leap(year):
@@ -74,3 +92,4 @@ def copy_to_clipboard(isik):
 if __name__ == "__main__":
     isik = generate()
     copy_to_clipboard(isik)
+    #gen_date_alt(20)
