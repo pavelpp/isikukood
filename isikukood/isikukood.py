@@ -68,7 +68,7 @@ def run_times(times):
 def copy_to_clipboard(isik):
     cmd = 'echo \"%s\" | pbcopy' % isik
     subprocess.check_output(cmd, shell=True)
-    cmd = 'osascript -e \'display notification "kopeeritud isikukood %s" with title "Teade"\'' % isik
+    cmd = 'osascript -e \'display notification "genereeritud isikukood %s" with title "Teade"\'' % isik
     subprocess.call(cmd, shell=True)
 
 if __name__ == "__main__":
