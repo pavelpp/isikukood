@@ -37,7 +37,6 @@ def get_bday(month, year):
         bday = randint(1, 31)
     return bday
 
-
 def is_leap(year):
     if (year % 4 == 0 and year % 100 != 0) or year % 400 == 0:
         return True
@@ -66,7 +65,12 @@ def run_times(times):
     for n in range(times):
         print(generate())
 
-if __name__ == "__main__":
-    isik = generate().strip("")
+def copy_to_clipboard(isik):
     cmd = 'echo \"%s\" | pbcopy' % isik
     subprocess.check_output(cmd, shell=True)
+    cmd = 'osascript -e \'display notification "kopeeritud isikukood %s" with title "Teade"\'' % isik
+    subprocess.call(cmd, shell=True)
+
+if __name__ == "__main__":
+    isik = generate()
+    copy_to_clipboard(isik)
